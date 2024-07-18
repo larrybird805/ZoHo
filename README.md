@@ -2,7 +2,7 @@
 All things ZoHo. See the functions folder for code as of July 18, 2024.
 This is currently all code pulled from the contractors. Please use the standard naming convention when we go over and rewrite everything. Camel case preferred. 
 Webhooks trigger via webhook: ${webhookTrigger.payload} and most Flows follow the format:
-> Webhook -> Function (on error)-> Send Email 
+> Webhook -> Function -> (on error)-> Send Email 
 
 ## Flows
 1) Course feex section schedule create, update, or delete
