@@ -4,6 +4,9 @@ This is currently all code pulled from the contractors. Please use the standard 
 Webhooks trigger via webhook: ${webhookTrigger.payload} and most Flows follow the format:
 > Webhook -> Function -> (on error)-> Send Email 
 
+J's ZoHo Doc: 
+[ZohoDocs - Course Section Create or Update](https://docs.google.com/document/d/1lhCuEAl-_mssyGtc183ow8Qk7oO96rjunLVsg_4a770/edit?ouid=117853339634377310823&usp=docs_home&ths=true)
+
 ## Flows
 1) Course feex section schedule create, update, or delete
 > Webbook > managecoursefees()
