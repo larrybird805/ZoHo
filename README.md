@@ -7,7 +7,7 @@ Most of these Flows follow the format:
 Webhook -> Function (on error)-> Send Email 
 
 1) Course feex section schedule create, update, or delete
-  -> Webbook > managecoursefees()
+> Webbook > managecoursefees()
 
 2) Course Section Create or Update
   -> Webhook > managecourses()
