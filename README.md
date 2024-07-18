@@ -10,28 +10,28 @@ Webhook -> Function (on error)-> Send Email
 > Webbook > managecoursefees()
 
 2) Course Section Create or Update
-  -> Webhook > managecourses()
+> Webhook > managecourses()
 
 3) Course section fee create or update
-  -> Webhook > managecoursefees()
+> Webhook > managecoursefees()
 
 4) Grade changes to final approval for a student section grading sheet
-  -> Webhook > processFinalApproval()
+> Webhook > processFinalApproval()
 
 5) New Student
-  -> Webhook > ManageStudents()
+> Webhook > ManageStudents()
    
 6) Student enrolls or drops a certificate; or certificate status changes
-  -> Webhook > managecertificates()
+> Webhook > managecertificates()
 
 7) Transaction - enrollments
-  -> Webhook > manageenrollments2()
+> Webhook > manageenrollments2()
 
 8) Transaction - enrollments
-  -> Webhook > manageenrollments2()
+> Webhook > manageenrollments2()
 
 9) Update Student Fix #2
-  -> Webhook > getstudentnumber() > Fetch module entry > ManageStudents()
+> Webhook > getstudentnumber() > Fetch module entry > ManageStudents()
 
 ## Functions:
 - managecoursefees (referenced twice see 1) and 3)
