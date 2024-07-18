@@ -1,0 +1,157 @@
+void ManageStudents(string payload, string studentid)
+{
+try 
+{
+	//extract fields from the payload body
+	student = payload.getJSON("integrationMessage").get("body").get("student");
+	firstname = student.get("firstName1");
+	salutation = "";
+	if(student.get("studentCredentials") != "")
+	{
+		t1 = student.get("studentCredentials").get("studentCredential");
+		if(t1 != null)
+		{
+			salutation = student.get("studentCredentials").get("studentCredential").get("credential");
+		}
+	}
+	ctt = student.get("contactMethods").toString();
+	if(ctt.contains("["))
+	{
+		contacttype = student.get("contactMethods").getJson("contactMethod").toString();
+	}
+	else
+	{
+		contacttype = student.get("contactMethods").get("contactMethod");
+	}
+	lastname = student.get("lastName");
+	fullname = firstname + " " + lastname;
+	destinyprofileexists = true;
+	studentnumber = student.get("studentNumber");
+	areas = list();
+	if(student.get("interestAreaAssociations") != null && student.get("interestAreaAssociations") != "")
+	{
+		areatest = student.get("interestAreaAssociations").tostring();
+		if(!areatest.contains("["))
+		{
+			are = student.getjson("interestAreaAssociations").get("interestAreaAssociation");
+			areas.add(are.get("name"));
+		}
+		else
+		{
+			are = student.getjson("interestAreaAssociations").getjson("interestAreaAssociation");
+			for each  are0 in are
+			{
+				areas.add(are0.get("name"));
+			}
+		}
+	}
+	source = "Destiny";
+	email = student.get("preferredEmail").get("emailAddress");
+	phone = "";
+	phonetype = "";
+	telephonest = student.get("telephones").tostring();
+	if(!telephonest.contains("["))
+	{
+		telephone = student.get("telephones").get("telephone");
+		phone = telephone.get("areaCode") + " " + telephone.get("telephoneNumber");
+		phonetype = telephone.get("typeCode");
+	}
+	else
+	{
+		telephones = student.get("telephones").getjson("telephone");
+		//get the first phone
+		for each  phonerec in telephones
+		{
+			phone = phonerec.get("areaCode") + " " + phonerec.get("telephoneNumber");
+			phonetype = phonerec.get("typeCode");
+			break;
+		}
+	}
+	tbirthdate = student.get("birthDate");
+	birthdate = null;
+	if(tbirthdate.length() > 0)
+	{
+		tbirthdate = tbirthdate.subString(0,tbirthdate.indexOf(" "));
+		birthdate = tbirthdate.toDate("dd/MM/yyyy");
+	}
+	else
+	{
+		birthdate = null;
+	}
+	aplicationstatus = student.get("profileStatus");
+	permnumber = student.get("schoolPersonnelNumber").tostring();
+	addresstype = student.get("preferredAddress").get("typeCode");
+	mailingstreet = student.get("preferredAddress").get("street1");
+	mailingstreet2 = student.get("preferredAddress").get("street2");
+	mailingcity = student.get("preferredAddress").get("city");
+	mailingstate = student.get("preferredAddress").get("provinceState");
+	mailingzip = student.get("preferredAddress").get("postalZip");
+	mailingcountry = student.get("preferredAddress").get("country");
+	mp = Map();
+	mp.put("First_Name",firstname);
+	mp.put("Last_Name",lastname);
+	mp.put("Salutation",salutation);
+	mp.put("Contact_Method",contacttype);
+	mp.put("Student_Interest_Areas",areas);
+	mp.put("Destiny_Profile_Exists",destinyprofileexists);
+	mp.put("Lead_Source",source);
+	mp.put("Email",email);
+	mp.put("Phone",phone);
+	mp.put("Phone_Type",phonetype);
+	if(birthdate != null)
+	{
+		mp.put("Date_of_Birth",birthdate.tostring("yyyy-MM-dd"));
+	}
+	mp.put("Application_Status",aplicationstatus);
+	mp.put("Perm_Number",permnumber);
+	mp.put("Address_Type",addresstype);
+	mp.put("Mailing_Street",mailingstreet);
+	mp.put("Mailing_Street_2",mailingstreet2);
+	mp.put("Mailing_City",mailingcity);
+	mp.put("Mailing_State",mailingstate);
+	mp.put("Mailing_Zip",mailingzip.tostring());
+	mp.put("Mailing_Country",mailingcountry);
+	info mp;
+	emptymap = Map();
+	mplog = Map();
+	mplog.put("Payload",payload);
+	if(ifnull(studentid,"") != "")
+	{
+		r = zoho.crm.updateRecord("Contacts",studentid.tolong(),mp);
+		mplog.put("Module","Update Students");
+		if(r.get("id") != null)
+		{
+			mplog.put("Result","Success");
+		}
+		else
+		{
+			mplog.put("Result","Error");
+		}
+	}
+	else
+	{
+		mp.put("Student_Number",studentnumber);
+		r = zoho.crm.createRecord("Contacts",mp,emptymap,"zohocrm");
+		if(r.get("id") != null)
+		{
+			mplog.put("Result","Success");
+		}
+		else
+		{
+			mplog.put("Result","Error");
+		}
+		mplog.put("Module","New Students");
+	}
+	mplog.put("DetailedLog",r);
+	zoho.crm.createRecord("Webhooklogs",mplog);
+}
+catch (e)
+{
+	mperr = Map();
+	mperr.put("DetailedLog",e);
+	mperr.put("Module","Update Students");
+	mperr.put("Result","Error");
+	mperr.put("Payload",payload);
+	zoho.crm.createRecord("Webhooklogs",mperr);
+}
+}
