@@ -26,10 +26,7 @@ Webhooks all triggrt via webhook: ${webhookTrigger.payload} and most Flows follo
 7) Transaction - enrollments
 > Webhook > manageenrollments2()
 
-8) Transaction - enrollments
-> Webhook > manageenrollments2()
-
-9) Update Student Fix #2
+8) Update Student Fix #2
 > Webhook > getstudentnumber() > Fetch module entry > ManageStudents()
 
 ## Functions:
