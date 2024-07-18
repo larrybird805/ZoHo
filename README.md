@@ -1,6 +1,6 @@
 # ZoHo
 All things ZoHo. See functions folder for code as of July 18, 2024
-
+This is currently all code pulled from the contractors. When we go over and rewrite everything can we PLEASE use standard naming convention. Camel case preferred. 
 
 ## Flows
 Webhooks are all ${webhookTrigger.payload} and most of these Flows follow the format:
