@@ -1,11 +1,10 @@
 # ZoHo
-All things ZoHo. See functions folder for code as of July 18, 2024
-This is currently all code pulled from the contractors. When we go over and rewrite everything can we PLEASE use standard naming convention. Camel case preferred. 
-
-## Flows
+All things ZoHo. See the functions folder for code as of July 18, 2024.
+This is currently all code pulled from the contractors. Please use the standard naming convention when we go over and rewrite everything. Camel case preferred. 
 Webhooks are all ${webhookTrigger.payload} and most of these Flows follow the format:
 > Webhook -> Function (on error)-> Send Email 
 
+## Flows
 1) Course feex section schedule create, update, or delete
 > Webbook > managecoursefees()
 
@@ -34,10 +33,10 @@ Webhooks are all ${webhookTrigger.payload} and most of these Flows follow the fo
 > Webhook > getstudentnumber() > Fetch module entry > ManageStudents()
 
 ## Functions:
-- [managecoursefees](/functions/managecoursefees) (referenced twice see 1) and 3)
-- managecourses
-- processFinalApproval 
-- ManageStudents (referenced in 6) and 10) 
-- managecertificates
-- manageenrollments2 (referenced twice see 8) and 9) 
-- getstudentnumber
+- [managecoursefees](/functions/managecoursefees) -referenced twice see 1) and 3)
+- [managecourses](/functions/managecourses)
+- [processFinalApproval](/functions/processFinalApproval) 
+- [ManageStudents](/functions/ManageStudents) -referenced in 6) and 10) 
+- [managecertificates](/functions/managecertificates)
+- [manageenrollments2](/functions/manageenrollments2) -referenced twice see 8) and 9) 
+- [getstudentnumber](/functions/getstudentnumber)
