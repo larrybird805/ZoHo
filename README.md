@@ -7,6 +7,16 @@ Webhooks trigger via webhook: ${webhookTrigger.payload} and most Flows follow th
 J's ZoHo Doc: 
 [ZohoDocs - Course Section Create or Update](https://docs.google.com/document/d/1lhCuEAl-_mssyGtc183ow8Qk7oO96rjunLVsg_4a770/edit?ouid=117853339634377310823&usp=docs_home&ths=true)
 
+
+## Functions:
+- [managecoursefees](/functions/managecoursefees) -referenced twice see 1) and 3)
+- [managecourses](/functions/managecourses)
+- [processFinalApproval](/functions/processFinalApproval) 
+- [ManageStudents](/functions/ManageStudents) -referenced in 5) and 8) 
+- [managecertificates](/functions/managecertificates)
+- [manageenrollments2](/functions/manageenrollments2)
+- [getstudentnumber](/functions/getstudentnumber)
+
 ## Flows
 1) Course feex section schedule create, update, or delete
 > Webbook > managecoursefees()
@@ -31,12 +41,3 @@ J's ZoHo Doc:
 
 8) Update Student Fix #2
 > Webhook > getstudentnumber() > Fetch module entry > ManageStudents()
-
-## Functions:
-- [managecoursefees](/functions/managecoursefees) -referenced twice see 1) and 3)
-- [managecourses](/functions/managecourses)
-- [processFinalApproval](/functions/processFinalApproval) 
-- [ManageStudents](/functions/ManageStudents) -referenced in 5) and 8) 
-- [managecertificates](/functions/managecertificates)
-- [manageenrollments2](/functions/manageenrollments2)
-- [getstudentnumber](/functions/getstudentnumber)
