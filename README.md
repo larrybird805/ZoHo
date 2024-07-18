@@ -4,7 +4,8 @@ All things ZoHo. See functions folder for code as of July 18, 2024
 
 ## Flows
 Most of these Flows follow the format:
-Webhook -> Function (on error)-> Send Email 
+> Webhook -> Function (on error)-> Send Email 
+Webhooks are all ${webhookTrigger.payload}
 
 1) Course feex section schedule create, update, or delete
 > Webbook > managecoursefees()
