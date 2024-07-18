@@ -1,0 +1,495 @@
+void manageenrollments2(string payload)
+{
+try 
+{
+	opt = Map();
+	eml = "";
+	if(payload.getJSON("integrationMessage").get("eventType") == "Transaction")
+	{
+		enrollmentdata = payload.getJSON("integrationMessage").get("body").get("transactionBasket");
+		if(enrollmentdata.get("status") == "Processed" && enrollmentdata.get("enrollmentEvents") != null)
+		{
+			events = enrollmentdata.get("enrollmentEvents");
+			evv = events.tostring();
+			if(evv.contains('"enrollmentEvent":['))
+			{
+				ev3 = events.getjson("enrollmentEvent");
+				for each  event in ev3
+				{
+					ac = event.get("activityCode");
+					if(ac == "Sale")
+					{
+						studentid = event.get("student").get("studentNumber");
+						section = event.get("enrollCourseSection").get("code");
+						course = event.get("enrollCourseSection").get("associatedCourse").get("code");
+						hours = truncate(ifnull(event.get("enrollCourseSection").get("overrideHours"),0),0);
+						units = event.get("numOfUnits");
+						cost = event.get("amount");
+						continue = 1;
+						existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + course + ") and (Section:equals:" + section + ")",1,1,opt,"zohocrm");
+						if(existingcourse.size() > 0)
+						{
+							for each  course in existingcourse
+							{
+								courseid_ = course.get("id");
+								startdate = course.get("Start_Date");
+								enddate = course.get("End_Date");
+								term = course.get("Term");
+								year = course.get("Year");
+								coursenumber = course.get("Course_Number");
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Course " + course + " & section " + section + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+						if(continue == 1)
+						{
+							existingstudent = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentid + ")",1,1,opt,"zohocrm");
+							if(existingstudent.size() > 0)
+							{
+								for each  studentt in existingstudent
+								{
+									studentid_ = studentt.get("id");
+									eml = studentt.get("Email");
+								}
+							}
+							else
+							{
+								mperr = Map();
+								mperr.put("DetailedLog","Student " + studentid + " NOT FOUND in zoho ");
+								mperr.put("Module","Enrollments");
+								mperr.put("Result","Error");
+								mperr.put("Payload",payload);
+								zoho.crm.createRecord("Webhooklogs",mperr);
+								continue = 0;
+							}
+							if(continue == 1)
+							{
+								mp = Map();
+								mp.put("Cost",cost);
+								mp.put("Course",courseid_.toLong());
+								mp.put("Student",studentid_.toLong());
+								mp.put("Course_Number",coursenumber);
+								mp.put("Section",section);
+								mp.put("Start_Date",startdate);
+								mp.put("Email",eml);
+								mp.put("End_date",enddate);
+								mp.put("Term",term);
+								mp.put("Year",year);
+								mp.put("Status","Enrolled");
+								mp.put("Units",units);
+								mp.put("Hours",hours);
+								r = zoho.crm.createRecord("Student_Enrollments",mp);
+								mplog = Map();
+								mplog.put("Result","Success");
+								mplog.put("Module","Enrollments");
+								mplog.put("Payload",payload);
+								mplog.put("DetailedLog",r);
+								zoho.crm.createRecord("Webhooklogs",mplog);
+							}
+						}
+					}
+					if(ac == "Refund")
+					{
+						studentid = event.get("student").get("studentNumber");
+						section = event.get("enrollCourseSection").get("code");
+						course = event.get("enrollCourseSection").get("associatedCourse").get("code");
+						continue = 1;
+						existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + course + ") and (Section:equals:" + section + ")",1,1,opt,"zohocrm");
+						if(existingcourse.size() > 0)
+						{
+							for each  course in existingcourse
+							{
+								courseid_ = course.get("id");
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Course " + course + " & section " + section + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+						if(continue == 1)
+						{
+							existingstudent = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentid + ")",1,1,opt,"zohocrm");
+							if(existingstudent.size() > 0)
+							{
+								for each  studentt in existingstudent
+								{
+									studentid_ = studentt.get("id");
+								}
+							}
+							else
+							{
+								mperr = Map();
+								mperr.put("DetailedLog","Student " + studentid + " NOT FOUND in zoho ");
+								mperr.put("Module","Enrollments");
+								mperr.put("Result","Error");
+								mperr.put("Payload",payload);
+								zoho.crm.createRecord("Webhooklogs",mperr);
+								continue = 0;
+							}
+							if(continue == 1)
+							{
+								existingenrollment = zoho.crm.searchRecords("Student_Enrollments","(((Student:equals:" + studentid_ + ") and (Course:equals:" + courseid_ + ")) and (Status:equals:Enrolled))",1,1,opt,"zohocrm");
+								if(existingenrollment.size() > 0)
+								{
+									for each  ec in existingenrollment
+									{
+										mpdr = Map();
+										mpdr.put("Status","Drop");
+										r = zoho.crm.updateRecord("Student_Enrollments",ec.get("id"),mpdr);
+										mplog = Map();
+										mplog.put("Result","Success");
+										mplog.put("Module","Enrollments");
+										mplog.put("Payload",payload);
+										mplog.put("DetailedLog",r);
+										zoho.crm.createRecord("Webhooklogs",mplog);
+									}
+								}
+								else
+								{
+									mperr = Map();
+									mperr.put("DetailedLog","Enrollment for Student " + studentid + "Course " + course + " & section " + section + " NOT FOUND in zoho " + " NOT FOUND in zoho ");
+									mperr.put("Module","Enrollments");
+									mperr.put("Result","Error");
+									mperr.put("Payload",payload);
+									zoho.crm.createRecord("Webhooklogs",mperr);
+									continue = 0;
+								}
+							}
+						}
+					}
+					if(ac == "Exchange")
+					{
+						studentid = event.get("student").get("studentNumber");
+						section = event.get("enrollCourseSection").get("code");
+						course = event.get("enrollCourseSection").get("associatedCourse").get("code");
+						continue = 1;
+						existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + course + ") and (Section:equals:" + section + ")",1,1,opt,"zohocrm");
+						if(existingcourse.size() > 0)
+						{
+							for each  course in existingcourse
+							{
+								courseid_ = course.get("id");
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Course " + course + " & section " + section + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+						if(continue == 1)
+						{
+							existingstudent = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentid + ")",1,1,opt,"zohocrm");
+							if(existingstudent.size() > 0)
+							{
+								for each  studentt in existingstudent
+								{
+									studentid_ = studentt.get("id");
+								}
+							}
+							else
+							{
+								mperr = Map();
+								mperr.put("DetailedLog","Student " + studentid + " NOT FOUND in zoho ");
+								mperr.put("Module","Enrollments");
+								mperr.put("Result","Error");
+								mperr.put("Payload",payload);
+								zoho.crm.createRecord("Webhooklogs",mperr);
+								continue = 0;
+							}
+							if(continue == 1)
+							{
+								exists = 0;
+								existingenrollment = zoho.crm.searchRecords("Student_Enrollments","(((Student:equals:" + studentid_ + ") and (Course:equals:" + courseid_ + ")) and (Status:equals:Enrolled))",1,1,opt,"zohocrm");
+								if(existingenrollment.size() > 0)
+								{
+									for each  ec in existingenrollment
+									{
+										mpdr = Map();
+										mpdr.put("Status","Transfer");
+										r = zoho.crm.updateRecord("Student_Enrollments",ec.get("id"),mpdr);
+										mplog = Map();
+										mplog.put("Result","Success");
+										mplog.put("Module","Enrollments");
+										mplog.put("Payload",payload);
+										mplog.put("DetailedLog",r);
+										zoho.crm.createRecord("Webhooklogs",mplog);
+									}
+								}
+								else
+								{
+									mperr = Map();
+									mperr.put("DetailedLog","Enrollment for Student " + studentid + "Course " + course + " & section " + section + " NOT FOUND in zoho " + " NOT FOUND in zoho ");
+									mperr.put("Module","Enrollments");
+									mperr.put("Result","Error");
+									mperr.put("Payload",payload);
+									zoho.crm.createRecord("Webhooklogs",mperr);
+									continue = 0;
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				event = events.get("enrollmentEvent");
+				ac = event.get("activityCode");
+				if(ac == "Sale")
+				{
+					studentid = event.get("student").get("studentNumber");
+					section = event.get("enrollCourseSection").get("code");
+					course = event.get("enrollCourseSection").get("associatedCourse").get("code");
+					hours = truncate(ifnull(event.get("enrollCourseSection").get("overrideHours"),0),0);
+					units = event.get("numOfUnits");
+					continue = 1;
+					cost = event.get("amount");
+					existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + course + ") and (Section:equals:" + section + ")",1,1,opt,"zohocrm");
+					if(existingcourse.size() > 0)
+					{
+						for each  course in existingcourse
+						{
+							courseid_ = course.get("id");
+							startdate = course.get("Start_Date");
+							enddate = course.get("End_Date");
+							term = course.get("Term");
+							year = course.get("Year");
+							coursenumber = course.get("Course_Number");
+						}
+					}
+					else
+					{
+						mperr = Map();
+						mperr.put("DetailedLog","Course " + course + " & section " + section + " NOT FOUND in zoho ");
+						mperr.put("Module","Enrollments");
+						mperr.put("Result","Error");
+						mperr.put("Payload",payload);
+						zoho.crm.createRecord("Webhooklogs",mperr);
+						continue = 0;
+					}
+					if(continue == 1)
+					{
+						existingstudent = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentid + ")",1,1,opt,"zohocrm");
+						if(existingstudent.size() > 0)
+						{
+							for each  studentt in existingstudent
+							{
+								studentid_ = studentt.get("id");
+								eml = studentt.get("Email");
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Student " + studentid + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+						if(continue == 1)
+						{
+							mp = Map();
+							mp.put("Cost",cost);
+							mp.put("Course",courseid_.toLong());
+							mp.put("Student",studentid_.toLong());
+							mp.put("Course_Number",coursenumber);
+							mp.put("Section",section);
+							mp.put("Start_Date",startdate);
+							mp.put("End_date",enddate);
+							mp.put("Term",term);
+							mp.put("Email",eml);
+							mp.put("Status","Enrolled");
+							mp.put("Year",year);
+							mp.put("Units",units);
+							mp.put("Hours",hours);
+							r = zoho.crm.createRecord("Student_Enrollments",mp);
+							mplog = Map();
+							mplog.put("Result","Success");
+							mplog.put("Module","Enrollments");
+							mplog.put("Payload",payload);
+							mplog.put("DetailedLog",r);
+							zoho.crm.createRecord("Webhooklogs",mplog);
+						}
+					}
+				}
+				if(ac == "Refund")
+				{
+					studentid = event.get("student").get("studentNumber");
+					section = event.get("enrollCourseSection").get("code");
+					course = event.get("enrollCourseSection").get("associatedCourse").get("code");
+					continue = 1;
+					existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + course + ") and (Section:equals:" + section + ")",1,1,opt,"zohocrm");
+					if(existingcourse.size() > 0)
+					{
+						for each  course1 in existingcourse
+						{
+							courseid_ = course1.get("id");
+						}
+					}
+					else
+					{
+						mperr = Map();
+						mperr.put("DetailedLog","Course " + course + " & section " + section + " NOT FOUND in zoho ");
+						mperr.put("Module","Enrollments");
+						mperr.put("Result","Error");
+						mperr.put("Payload",payload);
+						zoho.crm.createRecord("Webhooklogs",mperr);
+						continue = 0;
+					}
+					if(continue == 1)
+					{
+						existingstudent = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentid + ")",1,1,opt,"zohocrm");
+						if(existingstudent.size() > 0)
+						{
+							for each  studentt in existingstudent
+							{
+								studentid_ = studentt.get("id");
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Student " + studentid + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+						if(continue == 1)
+						{
+							existingenrollment = zoho.crm.searchRecords("Student_Enrollments","(((Student:equals:" + studentid_ + ") and (Course:equals:" + courseid_ + ")) and (Status:equals:Enrolled))",1,1,opt,"zohocrm");
+							if(existingenrollment.size() > 0)
+							{
+								for each  ec in existingenrollment
+								{
+									mpdr = Map();
+									mpdr.put("Status","Drop");
+									r = zoho.crm.updateRecord("Student_Enrollments",ec.get("id"),mpdr);
+									mplog = Map();
+									mplog.put("Result","Success");
+									mplog.put("Module","Enrollments");
+									mplog.put("Payload",payload);
+									mplog.put("DetailedLog",r);
+									zoho.crm.createRecord("Webhooklogs",mplog);
+								}
+							}
+							else
+							{
+								mperr = Map();
+								mperr.put("DetailedLog","Enrollment for Student " + studentid + " & Course " + course + " & section " + section + " NOT FOUND in zoho ");
+								mperr.put("Module","Enrollments");
+								mperr.put("Result","Error");
+								mperr.put("Payload",payload);
+								zoho.crm.createRecord("Webhooklogs",mperr);
+								continue = 0;
+							}
+						}
+					}
+				}
+				if(ac == "Exchange")
+				{
+					studentid = event.get("student").get("studentNumber");
+					section = event.get("enrollCourseSection").get("code");
+					course = event.get("enrollCourseSection").get("associatedCourse").get("code");
+					continue = 1;
+					existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + course + ") and (Section:equals:" + section + ")",1,1,opt,"zohocrm");
+					if(existingcourse.size() > 0)
+					{
+						for each  course in existingcourse
+						{
+							courseid_ = course.get("id");
+						}
+					}
+					else
+					{
+						mperr = Map();
+						mperr.put("DetailedLog","Course " + course + " & section " + section + " NOT FOUND in zoho ");
+						mperr.put("Module","Enrollments");
+						mperr.put("Result","Error");
+						mperr.put("Payload",payload);
+						zoho.crm.createRecord("Webhooklogs",mperr);
+						continue = 0;
+					}
+					if(continue == 1)
+					{
+						existingstudent = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentid + ")",1,1,opt,"zohocrm");
+						if(existingstudent.size() > 0)
+						{
+							for each  studentt in existingstudent
+							{
+								studentid_ = studentt.get("id");
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Student " + studentid + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+						existingenrollment = zoho.crm.searchRecords("Student_Enrollments","(((Student:equals:" + studentid_ + ") and (Course:equals:" + courseid_ + ")) and (Status:equals:Enrolled))",1,1,opt,"zohocrm");
+						if(existingenrollment.size() > 0)
+						{
+							for each  ec in existingenrollment
+							{
+								mpdr = Map();
+								mpdr.put("Status","Transfer");
+								r = zoho.crm.updateRecord("Student_Enrollments",ec.get("id"),mpdr);
+								mplog = Map();
+								mplog.put("Result","Success");
+								mplog.put("Module","Enrollments");
+								mplog.put("Payload",payload);
+								mplog.put("DetailedLog",r);
+								zoho.crm.createRecord("Webhooklogs",mplog);
+							}
+						}
+						else
+						{
+							mperr = Map();
+							mperr.put("DetailedLog","Enrollment for Student " + studentid + " & Course " + course + " & section " + section + " NOT FOUND in zoho ");
+							mperr.put("Module","Enrollments");
+							mperr.put("Result","Error");
+							mperr.put("Payload",payload);
+							zoho.crm.createRecord("Webhooklogs",mperr);
+							continue = 0;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+catch (e)
+{
+	mperr = Map();
+	mperr.put("DetailedLog",e);
+	mperr.put("Module","Enrollments");
+	mperr.put("Result","Error");
+	mperr.put("Payload",payload);
+	zoho.crm.createRecord("Webhooklogs",mperr);
+}
+}
