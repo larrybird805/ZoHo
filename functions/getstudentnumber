@@ -1,0 +1,5 @@
+string getstudentnumber(string payload)
+{
+student = payload.getJSON("integrationMessage").get("body").get("student");
+return student.get("studentNumber");
+}
