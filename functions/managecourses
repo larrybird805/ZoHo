@@ -1,0 +1,111 @@
+void managecourses(string payload)
+{
+try 
+{
+	coursedata = payload.getJSON("integrationMessage").get("body");
+	section = coursedata.get("courseSection").get("code");
+	coursenumber = coursedata.get("courseSection").get("associatedCourse").get("courseNumber");
+	coursename = coursedata.get("courseSection").get("associatedCourse").get("name");
+	Hours = coursedata.get("courseSection").get("sectionOverrideHours");
+	Status = coursedata.get("courseSection").get("sectionStatusCode");
+	Term = coursedata.get("courseSection").get("associatedTerm").get("name");
+	t1 = Term.toList(" ");
+	// split the term into Term & Year
+	Year = t1.get(1);
+	Term = t1.get(0);
+	Units = coursedata.get("courseSection").get("maxCEUnit");
+	mpx2 = Map();
+	existingcourse = zoho.crm.searchRecords("Courses","(Course_Number:equals:" + coursenumber + ") and (Section:equals:" + section + ")");
+	mp = Map();
+	id = 0;
+	continue = 1;
+	if(existingcourse.size() > 0)
+	{
+		for each  ec in existingcourse
+		{
+			id = ec.get("id").toLong();
+		}
+	}
+	/*else
+	{
+		mperr = Map();
+		mperr.put("DetailedLog","Course " + coursenumber + " & section " + section + " NOT FOUND in zoho ");
+		mperr.put("Module","Courses");
+		mperr.put("Result","Error");
+		mperr.put("Payload",payload);
+		zoho.crm.createRecord("Webhooklogs",mperr);
+		continue = 0;
+	}*/
+	if(continue == 1)
+	{
+		mp.put("Course_Number",coursenumber);
+		mp.put("Section",section);
+		discount = "";
+		if(coursedata.get("courseSection").get("discounts") != null)
+		{
+			dist = coursedata.get("courseSection").get("discounts").tostring();
+			if(!dist.contains("["))
+			{
+				discountx1 = coursedata.get("courseSection").get("discounts");
+				discountx = discountx1.getjson("discount");
+				discount = discountx.get("rate").toString() + ",";
+			}
+			else
+			{
+				discountss = coursedata.get("courseSection").get("discounts").get("discount");
+				for each  discountx in discountss
+				{
+					discount = discount + discountx.get("rate").toString() + ",";
+				}
+			}
+			mp.put("Discount",discount);
+		}
+		if(coursedata.get("courseSection").get("sectionEndDate") != null)
+		{
+			End_Date = coursedata.get("courseSection").get("sectionEndDate").todate('dd/MM/yyyy');
+			mp.put("End_Date",End_Date);
+		}
+		if(coursedata.get("courseSection").get("EnrollmentBeginDate") != null)
+		{
+			Enrollment_Date = coursedata.get("courseSection").get("EnrollmentBeginDate").substring(0,10).todate('dd/MM/yyyy');
+			mp.put("Enrollment_Date",Enrollment_Date);
+		}
+		mp.put("Hours",Hours);
+		Instructor = "";
+		if(coursedata.get("courseSection").get("sectionStartDate") != null)
+		{
+			Start_Date = coursedata.get("courseSection").get("sectionStartDate").todate('dd/MM/yyyy');
+			mp.put("Start_Date",Start_Date);
+		}
+		mp.put("Year",Year);
+		mp.put("Status",Status);
+		mp.put("Term",Term);
+		mp.put("Units",Units);
+		mp.put("Course_Title",coursename);
+		mplog = Map();
+		mplog.put("Result","Success");
+		mplog.put("Payload",payload);
+		if(id > 0)
+		{
+			r = zoho.crm.updateRecord("Courses",id,mp);
+			mplog.put("Module","Courses");
+		}
+		else
+		{
+			r = zoho.crm.createRecord("Courses",mp);
+			mplog.put("Module","Courses");
+		}
+		mplog.put("DetailedLog",r);
+		zoho.crm.createRecord("Webhooklogs",mplog);
+	}
+}
+catch (e)
+{
+	mperr = Map();
+	mperr.put("DetailedLog",e);
+	mperr.put("Module","Courses");
+	mperr.put("Result","Error");
+	mperr.put("Payload",payload);
+	zoho.crm.createRecord("Webhooklogs",mperr);
+}
+}
