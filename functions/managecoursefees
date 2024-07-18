@@ -1,4 +1,3 @@
-// Triggered by ${webhookTrigger.payload}
 void managecourses(string payload)
 {
 try 
