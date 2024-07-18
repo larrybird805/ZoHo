@@ -1,0 +1,83 @@
+void managecertificates(string payload)
+{
+try 
+{
+	certificatedata = payload.getJSON("integrationMessage").get("body");
+	studentnumber = certificatedata.get("studentCertificateInfo").get("studentNumber");
+	studentrecord = zoho.crm.searchRecords("Contacts","(Student_Number:equals:" + studentnumber + ")");
+	continue = 1;
+	if(studentrecord.size() > 0)
+	{
+		studentid = 0;
+		for each  student in studentrecord
+		{
+			studentid = student.get("id").toLong();
+		}
+	}
+	else
+	{
+		mperr = Map();
+		mperr.put("DetailedLog","Student " + studentnumber + " NOT FOUND in zoho ");
+		mperr.put("Module","Certificates");
+		mperr.put("Result","Error");
+		mperr.put("Payload",payload);
+		zoho.crm.createRecord("Webhooklogs",mperr);
+		continue = 0;
+	}
+	if(continue == 1)
+	{
+		UCSBcertificateid = certificatedata.get("studentCertificateInfo").get("certificateId");
+		certificaterecord = zoho.crm.searchRecords("Certificates","(Destiny_Certificate_ID:equals:" + UCSBcertificateid + ")");
+		certificateid = 0;
+		mp = Map();
+		if(certificaterecord.size() > 0)
+		{
+			for each  certificate in certificaterecord
+			{
+				certificateid = certificate.get("id").toLong();
+			}
+		}
+		mp.put("Student",studentid.tolong());
+		mp.put("Status",certificatedata.get("studentCertificateInfo").get("studentCertificateStatus"));
+		mp.put("Certificate_Code",certificatedata.get("studentCertificateInfo").get("certificateCode"));
+		if(certificatedata.get("studentCertificateInfo").get("certificateIssuanceDate") != null)
+		{
+			mp.put("Issued_Date",certificatedata.get("studentCertificateInfo").get("certificateIssuanceDate").substring(0,10).todate('dd/MM/yyyy'));
+		}
+		if(certificatedata.get("studentCertificateInfo").get("certificateAddDate") != null)
+		{
+			mp.put("Add_Date",certificatedata.get("studentCertificateInfo").get("certificateAddDate").substring(0,10).todate('dd/MM/yyyy'));
+		}
+		if(certificatedata.get("studentCertificateInfo").get("certificateCompletionDate") != null)
+		{
+			mp.put("Completion_Date",certificatedata.get("studentCertificateInfo").get("certificateCompletionDate").substring(0,10).todate('dd/MM/yyyy'));
+			mp.put("Completed","1");
+		}
+		mp.put("Certificate_Title",certificatedata.get("studentCertificateInfo").get("certificateName"));
+		mp.put("Destiny_Certificate_ID",UCSBcertificateid.tostring());
+		if(certificateid > 0)
+		{
+			r = zoho.crm.updateRecord("Certificates",certificateid.tolong(),mp);
+		}
+		else
+		{
+			r = zoho.crm.createRecord("Certificates",mp);
+		}
+		mplog = Map();
+		mplog.put("Result","Success");
+		mplog.put("Module","Certificates");
+		mplog.put("Payload",payload);
+		mplog.put("DetailedLog",r);
+		zoho.crm.createRecord("Webhooklogs",mplog);
+	}
+}
+catch (e)
+{
+	mperr = Map();
+	mperr.put("DetailedLog",e);
+	mperr.put("Module","Certificates");
+	mperr.put("Result","Error");
+	mperr.put("Payload",payload);
+	zoho.crm.createRecord("Webhooklogs",mperr);
+}
+}
