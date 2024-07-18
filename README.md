@@ -34,7 +34,7 @@ Webhooks are all ${webhookTrigger.payload} and most of these Flows follow the fo
 > Webhook > getstudentnumber() > Fetch module entry > ManageStudents()
 
 ## Functions:
-- managecoursefees (referenced twice see 1) and 3)
+- managecoursefees[/functions/managecoursefees] (referenced twice see 1) and 3)
 - managecourses
 - processFinalApproval 
 - ManageStudents (referenced in 6) and 10) 
