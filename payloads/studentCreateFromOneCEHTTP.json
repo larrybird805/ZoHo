@@ -1,0 +1,190 @@
+{
+    integrationMessage : {
+       sourceSystemId : "DestinyOneCE",
+       action : "NEW",
+       eventType : "PersonStudentCreate",
+       body : {
+          student : {
+             addresses : {
+                address : {
+                   country : "United States",
+                   foreignState : "",
+                   city : "City",
+                   county : "",
+                   postalZip : "00000",
+                   provinceState : "CA",
+                   typeCode : "Home",
+                   foreign : false,
+                   returnMail : false,
+                   modifiedDate : "05/08/2024 03:39 PM",
+                   street0 : "",
+                   street1 : "Street1",
+                   street2 : "StreetTwo",
+                   terminate : false,
+                   effectiveDate : "05/08/2024 03:38 PM",
+                   preferred : true
+                }
+             },
+             loginId : "X315531",
+             communicationMethod : "Email",
+             studentNumber : "X315531",
+             profileStatus : "Active",
+             learningGoals : {
+                learningGoal : [
+                   "Professional Certificate Program",
+                   "Professional Development Courses"
+                ]
+             },
+             educationHistory : "",
+             preferredAddress : {
+                country : "United States",
+                foreignState : "",
+                city : "City",
+                county : "",
+                postalZip : "00000",
+                provinceState : "CA",
+                typeCode : "Home",
+                foreign : false,
+                returnMail : false,
+                modifiedDate : "05/08/2024 03:39 PM",
+                street0 : "",
+                street1 : "Street1",
+                street2 : "StreetTwo",
+                terminate : false,
+                effectiveDate : "05/08/2024 03:38 PM",
+                preferred : true
+             },
+             studentCredentials : "",
+             gradeLevel : "Grade 12",
+             preferredContactTime : "Evening",
+             directBillingAccount : "",
+             allowStreamlinedTransfer : true,
+             enrollmentTimeframes : {
+                enrollmentTimeframe : [
+                   "Enroll as soon as possible",
+                   "Enroll in 1-3 months"
+                ]
+             },
+             otherEnrollmentTimeframe : "",
+             preferredName : "PreferredName",
+             enrollmentRaces : "",
+             enrolledPreviously : false,
+             netId : "",
+             studentCategories : "",
+             salutationCode : "",
+             otherLearningGoals : "",
+             version : 1,
+             privacyQuestions : {
+                privacyQuestion : [
+                   {
+                      answer : false,
+                      question : 0,
+                      version : 0,
+                      objectId : 39026874
+                   },
+                   {
+                      answer : false,
+                      question : 1,
+                      version : 0,
+                      objectId : 39026875
+                   },
+                   {
+                      answer : false,
+                      question : 2,
+                      version : 0,
+                      objectId : 39026876
+                   }
+                ]
+             },
+             objectStatusCode : "active",
+             name : "FirstName LastName",
+             documentFaxed : false,
+             interestAreaAssociations : "",
+             socialSecurityNum : "",
+             documentEmailed : false,
+             acceptanceDocumentMailAddressType : "Home",
+             lmsPersonId : "LMSStudentID",
+             lastName : "LastName",
+             code : "code39026871",
+             youthParticipant : false,
+             firstName1 : "FirstName",
+             cautionaryRequired : false,
+             profileHolds : "",
+             telephones : {
+                telephone : {
+                   areaCode : "000",
+                   telephoneNumber : "000-0000",
+                   tcpaConsented : false,
+                   countryCallingCode : "",
+                   release : false,
+                   telephoneExt : "",
+                   preferred : true,
+                   typeCode : "Home"
+                }
+             },
+             description : "",
+             personNumber : "X315531",
+             willTravelToCountry : false,
+             updater : {
+                loginId : "mktng",
+                printName : "Marketing",
+                personNumber : "",
+                personType : "Staff",
+                version : 39,
+                objectId : 27420363
+             },
+             emails : {
+                email : {
+                   emailAddress : "email@address.test",
+                   release : false,
+                   preferred : true,
+                   return : false,
+                   typeCode : "Standard"
+                }
+             },
+             preferredLocaleString : "en_US",
+             preferredEmail : {
+                emailAddress : "email@address.test",
+                release : false,
+                preferred : true,
+                return : false,
+                typeCode : "Standard"
+             },
+             objectId : 39026871,
+             internationalStudent : false,
+             proficiencyExamScores : "",
+             creator : {
+                loginId : "mktng",
+                printName : "Marketing",
+                personNumber : "",
+                personType : "Staff",
+                version : 39,
+                objectId : 27420363
+             },
+             comments : {
+                comment : {
+                   commentDate : "05/08/2024 03:38 PM",
+                   commentType : "General",
+                   comment : "CommentsForInternalUse"
+                }
+             },
+             studentAssociationDetails : "",
+             alternateName : "",
+             enrolmentGroups : "",
+             birthDate : "05/08/2024 12:00 AM",
+             copyOfVisa : false,
+             laterLifeLearner : false,
+             createTime : "05/08/2024 03:41 PM",
+             willStudyInCountry : false,
+             schoolPersonnelNumber : "PermNumber",
+             willWorkInCountry : false,
+             declineSsn : false,
+             contactMethods : {
+                contactMethod : "Any"
+             },
+             anonymous : false,
+             udfValues : ""
+          }
+       }
+    }
+ }
