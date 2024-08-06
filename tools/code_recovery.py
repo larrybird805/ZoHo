@@ -132,7 +132,7 @@ def submit_request():
 
             log_message("Sending request to OpenAI API...")
             response = client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are an expert software engineer specializing in orphaned code rehabilitation."},
                     {"role": "user", "content": prompt}
