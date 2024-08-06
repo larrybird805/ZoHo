@@ -1,0 +1,209 @@
+# JSON Key-Value Pairs
+
+## Key-Value List
+- `integrationMessage`: `{'sourceSystemId': 'DestinyOneCE', 'action': 'NEW', 'eventType': 'PersonStudentUpdate', 'body': {'student': {...}}}`
+- `integrationMessage.sourceSystemId`: `DestinyOneCE`
+- `integrationMessage.action`: `NEW`
+- `integrationMessage.eventType`: `PersonStudentUpdate`
+- `integrationMessage.body`: `{'student': {...}}`
+- `integrationMessage.body.student`: `{'addresses': {...}, 'loginId': 'X315531', ...}`
+- `integrationMessage.body.student.addresses`: `{'address': {...}}`
+- `integrationMessage.body.student.addresses.address`: `{'country': 'United States', ...}`
+- `integrationMessage.body.student.addresses.address.country`: `United States`
+- `integrationMessage.body.student.addresses.address.foreignState`: ``
+- `integrationMessage.body.student.addresses.address.city`: `CityUpdate`
+- `integrationMessage.body.student.addresses.address.county`: ``
+- `integrationMessage.body.student.addresses.address.postalZip`: `00000`
+- `integrationMessage.body.student.addresses.address.provinceState`: `CA`
+- `integrationMessage.body.student.addresses.address.typeCode`: `Home`
+- `integrationMessage.body.student.addresses.address.foreign`: `false`
+- `integrationMessage.body.student.addresses.address.returnMail`: `false`
+- `integrationMessage.body.student.addresses.address.modifiedDate`: `05/08/2024 03:44 PM`
+- `integrationMessage.body.student.addresses.address.street0`: ``
+- `integrationMessage.body.student.addresses.address.street1`: `Street1Update`
+- `integrationMessage.body.student.addresses.address.street2`: `StreetTwoUpdate`
+- `integrationMessage.body.student.addresses.address.terminate`: `false`
+- `integrationMessage.body.student.addresses.address.effectiveDate`: `05/08/2024 03:38 PM`
+- `integrationMessage.body.student.addresses.address.preferred`: `true`
+- `integrationMessage.body.student.loginId`: `X315531`
+- `integrationMessage.body.student.communicationMethod`: `Email`
+- `integrationMessage.body.student.studentNumber`: `X315531`
+- `integrationMessage.body.student.profileStatus`: `Active`
+- `integrationMessage.body.student.learningGoals`: `{'learningGoal': [...]}` 
+- `integrationMessage.body.student.learningGoals.learningGoal`: `['Professional Certificate Program', 'Professional Development Courses']`
+- `integrationMessage.body.student.educationHistory`: ``
+- `integrationMessage.body.student.preferredAddress`: `{'country': 'United States', ...}`
+- `integrationMessage.body.student.studentCredentials`: ``
+- `integrationMessage.body.student.gradeLevel`: `Grade 12`
+- `integrationMessage.body.student.preferredContactTime`: `Evening`
+- `integrationMessage.body.student.directBillingAccount`: ``
+- `integrationMessage.body.student.allowStreamlinedTransfer`: `true`
+- `integrationMessage.body.student.enrollmentTimeframes`: `{'enrollmentTimeframe': [...]}` 
+- `integrationMessage.body.student.enrollmentTimeframes.enrollmentTimeframe`: `['Enroll as soon as possible', 'Enroll in 1-3 months']`
+- `integrationMessage.body.student.otherEnrollmentTimeframe`: ``
+- `integrationMessage.body.student.preferredName`: `PreferredNameUpdate`
+- `integrationMessage.body.student.enrollmentRaces`: ``
+- `integrationMessage.body.student.enrolledPreviously`: `false`
+- `integrationMessage.body.student.netId`: ``
+- `integrationMessage.body.student.studentCategories`: ``
+- `integrationMessage.body.student.salutationCode`: ``
+- `integrationMessage.body.student.otherLearningGoals`: ``
+- `integrationMessage.body.student.version`: `2`
+- `integrationMessage.body.student.privacyQuestions`: `{'privacyQuestion': [...]}` 
+- `integrationMessage.body.student.privacyQuestions.privacyQuestion`: `[{'answer': false, ...}, ...]`
+- `integrationMessage.body.student.objectStatusCode`: `active`
+- `integrationMessage.body.student.name`: `FirstNameUpdate LastNameUpdate`
+- `integrationMessage.body.student.documentFaxed`: `false`
+- `integrationMessage.body.student.interestAreaAssociations`: ``
+- `integrationMessage.body.student.socialSecurityNum`: ``
+- `integrationMessage.body.student.documentEmailed`: `false`
+- `integrationMessage.body.student.acceptanceDocumentMailAddressType`: `Home`
+- `integrationMessage.body.student.lmsPersonId`: `LMSStudentIDUpdate`
+- `integrationMessage.body.student.lastName`: `LastNameUpdate`
+- `integrationMessage.body.student.code`: `code39026871`
+- `integrationMessage.body.student.youthParticipant`: `false`
+- `integrationMessage.body.student.firstName1`: `FirstNameUpdate`
+- `integrationMessage.body.student.cautionaryRequired`: `false`
+- `integrationMessage.body.student.profileHolds`: ``
+- `integrationMessage.body.student.telephones`: `{'telephone': {...}}`
+- `integrationMessage.body.student.telephones.telephone`: `{'areaCode': 111, ...}`
+- `integrationMessage.body.student.telephones.telephone.areaCode`: `111`
+- `integrationMessage.body.student.telephones.telephone.telephoneNumber`: `111-1111`
+- `integrationMessage.body.student.telephones.telephone.tcpaConsented`: `false`
+- `integrationMessage.body.student.telephones.telephone.countryCallingCode`: ``
+- `integrationMessage.body.student.telephones.telephone.release`: `false`
+- `integrationMessage.body.student.telephones.telephone.telephoneExt`: ``
+- `integrationMessage.body.student.telephones.telephone.preferred`: `true`
+- `integrationMessage.body.student.telephones.telephone.typeCode`: `Home`
+- `integrationMessage.body.student.description`: ``
+- `integrationMessage.body.student.personNumber`: `X315531`
+- `integrationMessage.body.student.willTravelToCountry`: `false`
+- `integrationMessage.body.student.updater`: `{'loginId': 'mktng', ...}`
+- `integrationMessage.body.student.emails`: `{'email': {...}}`
+- `integrationMessage.body.student.emails.email`: `{'emailAddress': 'email@address.testUpdate', ...}`
+- `integrationMessage.body.student.preferredLocaleString`: `en_US`
+- `integrationMessage.body.student.preferredEmail`: `{'emailAddress': 'email@address.testUpdate', ...}`
+- `integrationMessage.body.student.objectId`: `39026871`
+- `integrationMessage.body.student.internationalStudent`: `false`
+- `integrationMessage.body.student.proficiencyExamScores`: ``
+- `integrationMessage.body.student.creator`: `{'loginId': 'mktng', ...}`
+- `integrationMessage.body.student.comments`: `{'comment': [...]}` 
+- `integrationMessage.body.student.comments.comment`: `[{'commentDate': '05/08/2024 03:38 PM', ...}, ...]`
+- `integrationMessage.body.student.studentAssociationDetails`: ``
+- `integrationMessage.body.student.alternateName`: ``
+- `integrationMessage.body.student.enrolmentGroups`: ``
+- `integrationMessage.body.student.birthDate`: `05/08/2024 12:00 AM`
+- `integrationMessage.body.student.copyOfVisa`: `false`
+- `integrationMessage.body.student.laterLifeLearner`: `false`
+- `integrationMessage.body.student.createTime`: `05/08/2024 03:41 PM`
+- `integrationMessage.body.student.willStudyInCountry`: `false`
+- `integrationMessage.body.student.schoolPersonnelNumber`: `PermNumberUpdate`
+- `integrationMessage.body.student.willWorkInCountry`: `false`
+- `integrationMessage.body.student.declineSsn`: `false`
+- `integrationMessage.body.student.contactMethods`: `{'contactMethod': 'Any'}`
+- `integrationMessage.body.student.anonymous`: `false`
+- `integrationMessage.body.student.udfValues`: ``
+
+## Python Access Code
+- `integrationMessage`: `json_data.get('integrationMessage')`
+- `integrationMessage.sourceSystemId`: `json_data.get('integrationMessage').get('sourceSystemId')`
+- `integrationMessage.action`: `json_data.get('integrationMessage').get('action')`
+- `integrationMessage.eventType`: `json_data.get('integrationMessage').get('eventType')`
+- `integrationMessage.body`: `json_data.get('integrationMessage').get('body')`
+- `integrationMessage.body.student`: `json_data.get('integrationMessage').get('body').get('student')`
+- `integrationMessage.body.student.addresses`: `json_data.get('integrationMessage').get('body').get('student').get('addresses')`
+- `integrationMessage.body.student.addresses.address`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address')`
+- `integrationMessage.body.student.addresses.address.country`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('country')`
+- `integrationMessage.body.student.addresses.address.foreignState`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('foreignState')`
+- `integrationMessage.body.student.addresses.address.city`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('city')`
+- `integrationMessage.body.student.addresses.address.county`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('county')`
+- `integrationMessage.body.student.addresses.address.postalZip`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('postalZip')`
+- `integrationMessage.body.student.addresses.address.provinceState`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('provinceState')`
+- `integrationMessage.body.student.addresses.address.typeCode`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('typeCode')`
+- `integrationMessage.body.student.addresses.address.foreign`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('foreign')`
+- `integrationMessage.body.student.addresses.address.returnMail`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('returnMail')`
+- `integrationMessage.body.student.addresses.address.modifiedDate`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('modifiedDate')`
+- `integrationMessage.body.student.addresses.address.street0`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('street0')`
+- `integrationMessage.body.student.addresses.address.street1`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('street1')`
+- `integrationMessage.body.student.addresses.address.street2`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('street2')`
+- `integrationMessage.body.student.addresses.address.terminate`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('terminate')`
+- `integrationMessage.body.student.addresses.address.effectiveDate`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('effectiveDate')`
+- `integrationMessage.body.student.addresses.address.preferred`: `json_data.get('integrationMessage').get('body').get('student').get('addresses').get('address').get('preferred')`
+- `integrationMessage.body.student.loginId`: `json_data.get('integrationMessage').get('body').get('student').get('loginId')`
+- `integrationMessage.body.student.communicationMethod`: `json_data.get('integrationMessage').get('body').get('student').get('communicationMethod')`
+- `integrationMessage.body.student.studentNumber`: `json_data.get('integrationMessage').get('body').get('student').get('studentNumber')`
+- `integrationMessage.body.student.profileStatus`: `json_data.get('integrationMessage').get('body').get('student').get('profileStatus')`
+- `integrationMessage.body.student.learningGoals`: `json_data.get('integrationMessage').get('body').get('student').get('learningGoals')`
+- `integrationMessage.body.student.learningGoals.learningGoal`: `json_data.get('integrationMessage').get('body').get('student').get('learningGoals').get('learningGoal')`
+- `integrationMessage.body.student.educationHistory`: `json_data.get('integrationMessage').get('body').get('student').get('educationHistory')`
+- `integrationMessage.body.student.preferredAddress`: `json_data.get('integrationMessage').get('body').get('student').get('preferredAddress')`
+- `integrationMessage.body.student.studentCredentials`: `json_data.get('integrationMessage').get('body').get('student').get('studentCredentials')`
+- `integrationMessage.body.student.gradeLevel`: `json_data.get('integrationMessage').get('body').get('student').get('gradeLevel')`
+- `integrationMessage.body.student.preferredContactTime`: `json_data.get('integrationMessage').get('body').get('student').get('preferredContactTime')`
+- `integrationMessage.body.student.directBillingAccount`: `json_data.get('integrationMessage').get('body').get('student').get('directBillingAccount')`
+- `integrationMessage.body.student.allowStreamlinedTransfer`: `json_data.get('integrationMessage').get('body').get('student').get('allowStreamlinedTransfer')`
+- `integrationMessage.body.student.enrollmentTimeframes`: `json_data.get('integrationMessage').get('body').get('student').get('enrollmentTimeframes')`
+- `integrationMessage.body.student.enrollmentTimeframes.enrollmentTimeframe`: `json_data.get('integrationMessage').get('body').get('student').get('enrollmentTimeframes').get('enrollmentTimeframe')`
+- `integrationMessage.body.student.otherEnrollmentTimeframe`: `json_data.get('integrationMessage').get('body').get('student').get('otherEnrollmentTimeframe')`
+- `integrationMessage.body.student.preferredName`: `json_data.get('integrationMessage').get('body').get('student').get('preferredName')`
+- `integrationMessage.body.student.enrollmentRaces`: `json_data.get('integrationMessage').get('body').get('student').get('enrollmentRaces')`
+- `integrationMessage.body.student.enrolledPreviously`: `json_data.get('integrationMessage').get('body').get('student').get('enrolledPreviously')`
+- `integrationMessage.body.student.netId`: `json_data.get('integrationMessage').get('body').get('student').get('netId')`
+- `integrationMessage.body.student.studentCategories`: `json_data.get('integrationMessage').get('body').get('student').get('studentCategories')`
+- `integrationMessage.body.student.salutationCode`: `json_data.get('integrationMessage').get('body').get('student').get('salutationCode')`
+- `integrationMessage.body.student.otherLearningGoals`: `json_data.get('integrationMessage').get('body').get('student').get('otherLearningGoals')`
+- `integrationMessage.body.student.version`: `json_data.get('integrationMessage').get('body').get('student').get('version')`
+- `integrationMessage.body.student.privacyQuestions`: `json_data.get('integrationMessage').get('body').get('student').get('privacyQuestions')`
+- `integrationMessage.body.student.privacyQuestions.privacyQuestion`: `json_data.get('integrationMessage').get('body').get('student').get('privacyQuestions').get('privacyQuestion')`
+- `integrationMessage.body.student.objectStatusCode`: `json_data.get('integrationMessage').get('body').get('student').get('objectStatusCode')`
+- `integrationMessage.body.student.name`: `json_data.get('integrationMessage').get('body').get('student').get('name')`
+- `integrationMessage.body.student.documentFaxed`: `json_data.get('integrationMessage').get('body').get('student').get('documentFaxed')`
+- `integrationMessage.body.student.interestAreaAssociations`: `json_data.get('integrationMessage').get('body').get('student').get('interestAreaAssociations')`
+- `integrationMessage.body.student.socialSecurityNum`: `json_data.get('integrationMessage').get('body').get('student').get('socialSecurityNum')`
+- `integrationMessage.body.student.documentEmailed`: `json_data.get('integrationMessage').get('body').get('student').get('documentEmailed')`
+- `integrationMessage.body.student.acceptanceDocumentMailAddressType`: `json_data.get('integrationMessage').get('body').get('student').get('acceptanceDocumentMailAddressType')`
+- `integrationMessage.body.student.lmsPersonId`: `json_data.get('integrationMessage').get('body').get('student').get('lmsPersonId')`
+- `integrationMessage.body.student.lastName`: `json_data.get('integrationMessage').get('body').get('student').get('lastName')`
+- `integrationMessage.body.student.code`: `json_data.get('integrationMessage').get('body').get('student').get('code')`
+- `integrationMessage.body.student.youthParticipant`: `json_data.get('integrationMessage').get('body').get('student').get('youthParticipant')`
+- `integrationMessage.body.student.firstName1`: `json_data.get('integrationMessage').get('body').get('student').get('firstName1')`
+- `integrationMessage.body.student.cautionaryRequired`: `json_data.get('integrationMessage').get('body').get('student').get('cautionaryRequired')`
+- `integrationMessage.body.student.profileHolds`: `json_data.get('integrationMessage').get('body').get('student').get('profileHolds')`
+- `integrationMessage.body.student.telephones`: `json_data.get('integrationMessage').get('body').get('student').get('telephones')`
+- `integrationMessage.body.student.telephones.telephone`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone')`
+- `integrationMessage.body.student.telephones.telephone.areaCode`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('areaCode')`
+- `integrationMessage.body.student.telephones.telephone.telephoneNumber`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('telephoneNumber')`
+- `integrationMessage.body.student.telephones.telephone.tcpaConsented`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('tcpaConsented')`
+- `integrationMessage.body.student.telephones.telephone.countryCallingCode`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('countryCallingCode')`
+- `integrationMessage.body.student.telephones.telephone.release`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('release')`
+- `integrationMessage.body.student.telephones.telephone.telephoneExt`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('telephoneExt')`
+- `integrationMessage.body.student.telephones.telephone.preferred`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('preferred')`
+- `integrationMessage.body.student.telephones.telephone.typeCode`: `json_data.get('integrationMessage').get('body').get('student').get('telephones').get('telephone').get('typeCode')`
+- `integrationMessage.body.student.description`: `json_data.get('integrationMessage').get('body').get('student').get('description')`
+- `integrationMessage.body.student.personNumber`: `json_data.get('integrationMessage').get('body').get('student').get('personNumber')`
+- `integrationMessage.body.student.willTravelToCountry`: `json_data.get('integrationMessage').get('body').get('student').get('willTravelToCountry')`
+- `integrationMessage.body.student.updater`: `json_data.get('integrationMessage').get('body').get('student').get('updater')`
+- `integrationMessage.body.student.emails`: `json_data.get('integrationMessage').get('body').get('student').get('emails')`
+- `integrationMessage.body.student.emails.email`: `json_data.get('integrationMessage').get('body').get('student').get('emails').get('email')`
+- `integrationMessage.body.student.preferredLocaleString`: `json_data.get('integrationMessage').get('body').get('student').get('preferredLocaleString')`
+- `integrationMessage.body.student.preferredEmail`: `json_data.get('integrationMessage').get('body').get('student').get('preferredEmail')`
+- `integrationMessage.body.student.objectId`: `json_data.get('integrationMessage').get('body').get('student').get('objectId')`
+- `integrationMessage.body.student.internationalStudent`: `json_data.get('integrationMessage').get('body').get('student').get('internationalStudent')`
+- `integrationMessage.body.student.proficiencyExamScores`: `json_data.get('integrationMessage').get('body').get('student').get('proficiencyExamScores')`
+- `integrationMessage.body.student.creator`: `json_data.get('integrationMessage').get('body').get('student').get('creator')`
+- `integrationMessage.body.student.comments`: `json_data.get('integrationMessage').get('body').get('student').get('comments')`
+- `integrationMessage.body.student.comments.comment`: `json_data.get('integrationMessage').get('body').get('student').get('comments').get('comment')`
+- `integrationMessage.body.student.studentAssociationDetails`: `json_data.get('integrationMessage').get('body').get('student').get('studentAssociationDetails')`
+- `integrationMessage.body.student.alternateName`: `json_data.get('integrationMessage').get('body').get('student').get('alternateName')`
+- `integrationMessage.body.student.enrolmentGroups`: `json_data.get('integrationMessage').get('body').get('student').get('enrolmentGroups')`
+- `integrationMessage.body.student.birthDate`: `json_data.get('integrationMessage').get('body').get('student').get('birthDate')`
+- `integrationMessage.body.student.copyOfVisa`: `json_data.get('integrationMessage').get('body').get('student').get('copyOfVisa')`
+- `integrationMessage.body.student.laterLifeLearner`: `json_data.get('integrationMessage').get('body').get('student').get('laterLifeLearner')`
+- `integrationMessage.body.student.createTime`: `json_data.get('integrationMessage').get('body').get('student').get('createTime')`
+- `integrationMessage.body.student.willStudyInCountry`: `json_data.get('integrationMessage').get('body').get('student').get('willStudyInCountry')`
+- `integrationMessage.body.student.schoolPersonnelNumber`: `json_data.get('integrationMessage').get('body').get('student').get('schoolPersonnelNumber')`
+- `integrationMessage.body.student.willWorkInCountry`: `json_data.get('integrationMessage').get('body').get('student').get('willWorkInCountry')`
+- `integrationMessage.body.student.declineSsn`: `json_data.get('integrationMessage').get('body').get('student').get('declineSsn')`
+- `integrationMessage.body.student.contactMethods`: `json_data.get('integrationMessage').get('body').get('student').get('contactMethods')`
+- `integrationMessage.body.student.anonymous`: `json_data.get('integrationMessage').get('body').get('student').get('anonymous')`
+- `integrationMessage.body.student.udfValues`: `json_data.get('integrationMessage').get('body').get('student').get('udfValues')`
